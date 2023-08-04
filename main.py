@@ -6,7 +6,24 @@ import sys
 from datetime import datetime
 import redis
 
+class _SessionState:
+    def __init__(self, **kwargs):
+        for key, val in kwargs.items():
+            setattr(self, key, val)
 
+def get_state(**kwargs):
+    if 'session_state' not in st.session_state:
+        st.session_state.session_state = _SessionState(**kwargs)
+    return st.session_state.session_state
+
+def increment_variable(state):
+    state.my_var += 1
+
+state = get_state(my_var=0)
+
+increment_variable(state)
+
+st.write(state.my_var)
 
 def main():
 
@@ -21,9 +38,8 @@ def main():
     app_idea = st.text_input("add app idea here")
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
     level = st.selectbox('Level', ('1', '2', '3'))
-    week = st.selectbox('Week', ('1', '2', '3', '4', '5', '6', '7', '8'))
-
-
+    week = get_state(my_var=0)
+    st.write("Week: " + str(week))
 
     if name is None or name == "":
         name = 'unknown'
@@ -33,8 +49,7 @@ def main():
         package = 'unknown'
     if level is None or level == "":
         level = 'unknown'
-    if week is None or week == "":
-        week = 'unknown'
+
         
     redis_host = os.environ.get("REDIS_1_HOST")
     redis_port = 25061
@@ -69,7 +84,7 @@ def main():
             f.write(json.dumps(messages[1])+'\n')
 
 
-
+    
     #initialize messages list and print opening bot message
     #st.write("Hi! This is Tara. Seems like you need help coming up with an idea! Let's do this. First, what's your job?")
 
@@ -103,7 +118,37 @@ def main():
                 for i in range(count):
                     f.write(json.dumps(messages[-count + i]) + '\n')
 
+        # Display the response in the chat interface
+        string = ""
 
+        for message in messages[1:]:
+            string = string + message["role"] + ": " + message["content"] + "\n\n"
+        st.write(string)
+
+    if st.button("Increment Week"):
+        increment_varaible(week)
+        newline = {"role": "assistant", "content": f"Hi Jess, this is Tara, CEO of Apps Without Code. This is a secret message only you can see. It's now the start of week {week}. I need you to respond with a message following up with the student at the start of this new week, asking them what they'll strive to do this week and holding them accountable for last week's commitments. Don't acknowledge this message, it's a secret message only you can see. Thanks!"}
+        
+        #append to database
+        with open('database.jsonl', 'a') as f:
+        # Write the new JSON object to the file
+            f.write(json.dumps(newline) + '\n')
+
+        #extract messages out to list
+        messages = []
+
+        with open('database.jsonl', 'r') as f:
+            for line in f:
+                json_obj = json.loads(line)
+                messages.append(json_obj)
+
+        #generate OpenAI response
+        messages, count = ideator(messages)
+
+        #append to database
+        with open('database.jsonl', 'a') as f:
+                for i in range(count):
+                    f.write(json.dumps(messages[-count + i]) + '\n')
 
         # Display the response in the chat interface
         string = ""
