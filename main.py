@@ -157,7 +157,7 @@ def main():
             else:
                 string = string + '\n'
         st.write(string)
-        st.write("Week: " + str(week.my_var))
+    st.write("Week: " + str(week.my_var))
             
 
 if __name__ == '__main__':
