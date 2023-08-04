@@ -33,6 +33,8 @@ def main():
         package = 'unknown'
     if level is None or level == "":
         level = 'unknown'
+    if week is None or week == "":
+        week = 'unknown'
         
     redis_host = os.environ.get("REDIS_1_HOST")
     redis_port = 25061
