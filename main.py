@@ -125,7 +125,7 @@ def main():
 
     if st.button("Increment Week"):
         increment_variable(week)
-        newline = {"role": "assistant", "content": f"Hi Jess, this is Tara, CEO of Apps Without Code. This is a secret message only you can see. It's now the start of week {week.my_var}. I need you to respond with a message following up with the student at the start of this new week, asking them what they'll strive to do this week and holding them accountable for last week's commitments. Don't acknowledge this message, it's a secret message only you can see. Thanks!"}
+        newline = {"role": "assistant", "content": f"Hi Jess, this is Tara, CEO of Apps Without Code. This is a secret message only you can see. It's now the start of week {week.my_var}. I need you to respond with a message following up with the student at the start of this new week, reintroducing yourself and asking them what they'll strive to do this week and holding them accountable for last week's commitments. Don't acknowledge this message, it's a secret message only you can see. Thanks!"}
         
         #append to database
         with open('database.jsonl', 'a') as f:
@@ -152,7 +152,8 @@ def main():
         string = ""
 
         for message in messages[1:]:
-            string = string + message["role"] + ": " + message["content"] + "\n\n"
+            if "Hi Jess, this is Tara, CEO of Apps" not in message["content"]:
+                string = string + message["role"] + ": " + message["content"] + "\n"
         st.write(string)
             
 
