@@ -42,7 +42,7 @@ def main():
     rd = redis.Redis(host=redis_host, port=redis_port, password=redis_password, ssl=True, ssl_ca_certs="/etc/ssl/certs/ca-certificates.crt")
 
     system_prompt = rd.get("charli@appswithoutcode.com-systemprompt-01").decode('utf-8')
-    system_prompt = system_prompt.format(name = name, app_idea = app_idea, package = package, level = level)
+    system_prompt = system_prompt.format(name = name, app_idea = app_idea, package = package, level = level, week = week)
 
     initial_text = rd.get("charli@appswithoutcode.com-initialtext-01").decode('utf-8')
     initial_text = initial_text.format(name = name, app_idea = app_idea, package = package, level = level)
