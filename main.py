@@ -18,12 +18,8 @@ def get_state(**kwargs):
 
 def increment_variable(state):
     state.my_var += 1
-
     state = get_state(my_var=0)
-    
     increment_variable(state)
-    
-    st.write(state.my_var)
 
 def main():
 
@@ -39,7 +35,7 @@ def main():
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
     level = st.selectbox('Level', ('1', '2', '3'))
     week = get_state(my_var=0)
-    st.write("Week: " + str(week))
+    st.write("Week: " + str(week.my_var))
 
     if name is None or name == "":
         name = 'unknown'
