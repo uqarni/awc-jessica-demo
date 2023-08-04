@@ -20,7 +20,7 @@ def main():
     name = st.text_input("Student name")
     app_idea = st.text_input("add app idea here")
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
-    level = st.selectbox('Week', ('1', '2', '3'))
+    level = st.selectbox('Level', ('1', '2', '3'))
 
 
 
