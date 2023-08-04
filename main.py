@@ -36,7 +36,7 @@ def main():
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
     level = st.selectbox('Level', ('1', '2', '3'))
     week = get_state(my_var=1)
-    st.write("Week: " + str(week.my_var))
+    
 
     if name is None or name == "":
         name = 'unknown'
@@ -157,6 +157,7 @@ def main():
             else:
                 string = string + '\n'
         st.write(string)
+        st.write("Week: " + str(week.my_var))
             
 
 if __name__ == '__main__':
