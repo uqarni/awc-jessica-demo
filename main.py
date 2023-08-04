@@ -34,7 +34,6 @@ def main():
     name = st.text_input("Student name")
     app_idea = st.text_input("add app idea here")
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
-    level = st.selectbox('Level', ('1', '2', '3'))
     week = get_state(my_var=1)
     
 
@@ -45,7 +44,7 @@ def main():
     if package is None or package == "":
         package = 'unknown'
     if level is None or level == "":
-        level = 'unknown'
+        level = 'unknown; user will clarify'
 
         
     redis_host = os.environ.get("REDIS_1_HOST")
