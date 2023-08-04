@@ -21,6 +21,7 @@ def main():
     app_idea = st.text_input("add app idea here")
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
     level = st.selectbox('Level', ('1', '2', '3'))
+    week = st.selectbox('Week', ('1,', '2,', '3', '4', '5', '6', '7', '8'))
 
 
 
