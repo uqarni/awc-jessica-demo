@@ -43,8 +43,7 @@ def main():
         app_idea = 'unknown'
     if package is None or package == "":
         package = 'unknown'
-    if level is None or level == "":
-        level = 'unknown; user will clarify'
+    level = 'unknown; user will clarify'
 
         
     redis_host = os.environ.get("REDIS_1_HOST")
