@@ -19,11 +19,11 @@ def get_state(**kwargs):
 def increment_variable(state):
     state.my_var += 1
 
-state = get_state(my_var=0)
-
-increment_variable(state)
-
-st.write(state.my_var)
+    state = get_state(my_var=0)
+    
+    increment_variable(state)
+    
+    st.write(state.my_var)
 
 def main():
 
