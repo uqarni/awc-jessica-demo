@@ -153,7 +153,9 @@ def main():
 
         for message in messages[1:]:
             if "Hi Jess, this is Tara, CEO of Apps" not in message["content"]:
-                string = string + message["role"] + ": " + message["content"] + "\n"
+                string = string + message["role"] + ": " + message["content"] + "\n\n"
+            else:
+                string = string + '\n'
         st.write(string)
             
 
