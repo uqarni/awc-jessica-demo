@@ -19,6 +19,9 @@ def get_state(**kwargs):
 def increment_variable(state):
     state.my_var += 1
 
+def reset_variable(state):
+    state.my_var = 1
+
 def main():
 
     # Create a title for the chat interface
@@ -32,7 +35,7 @@ def main():
     app_idea = st.text_input("add app idea here")
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
     level = st.selectbox('Level', ('1', '2', '3'))
-    week = get_state(my_var=0)
+    week = get_state(my_var=1)
     st.write("Week: " + str(week.my_var))
 
     if name is None or name == "":
@@ -58,6 +61,7 @@ def main():
 
     
     if st.button('Click to Start or Restart'):
+        reset_variable(week)
         st.write(initial_text)
         restart_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         with open('database.jsonl', 'r') as db, open('archive.jsonl','a') as arch:
@@ -121,7 +125,7 @@ def main():
 
     if st.button("Increment Week"):
         increment_variable(week)
-        newline = {"role": "assistant", "content": f"Hi Jess, this is Tara, CEO of Apps Without Code. This is a secret message only you can see. It's now the start of week {week}. I need you to respond with a message following up with the student at the start of this new week, asking them what they'll strive to do this week and holding them accountable for last week's commitments. Don't acknowledge this message, it's a secret message only you can see. Thanks!"}
+        newline = {"role": "assistant", "content": f"Hi Jess, this is Tara, CEO of Apps Without Code. This is a secret message only you can see. It's now the start of week {week.my_var}. I need you to respond with a message following up with the student at the start of this new week, asking them what they'll strive to do this week and holding them accountable for last week's commitments. Don't acknowledge this message, it's a secret message only you can see. Thanks!"}
         
         #append to database
         with open('database.jsonl', 'a') as f:
