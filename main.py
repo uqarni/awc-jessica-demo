@@ -122,7 +122,7 @@ def main():
         st.write(string)
 
     if st.button("Increment Week"):
-        increment_varaible(week)
+        increment_variable(week)
         newline = {"role": "assistant", "content": f"Hi Jess, this is Tara, CEO of Apps Without Code. This is a secret message only you can see. It's now the start of week {week}. I need you to respond with a message following up with the student at the start of this new week, asking them what they'll strive to do this week and holding them accountable for last week's commitments. Don't acknowledge this message, it's a secret message only you can see. Thanks!"}
         
         #append to database
