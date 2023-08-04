@@ -155,7 +155,7 @@ def main():
             if "Hi Jess, this is Tara, CEO of Apps" not in message["content"]:
                 string = string + message["role"] + ": " + message["content"] + "\n\n"
             else:
-                string = string + '\n'
+                string = string + f'Start of Week {week.my_var}\n'
         st.write(string)
     st.write("Week: " + str(week.my_var))
             
