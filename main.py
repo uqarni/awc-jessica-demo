@@ -32,18 +32,24 @@ def main():
     
     #variables for system prompt
     name = st.text_input("Student name")
-    app_idea = st.text_input("add app idea here")
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
     week = get_state(my_var=1)
+    level = st.selectbox('Level:', ('1','2','3'))
+    level_date = st.text_input("Date of Level")
     
 
     if name is None or name == "":
         name = 'unknown'
-    if app_idea is None or app_idea == "": 
-        app_idea = 'unknown'
     if package is None or package == "":
         package = 'unknown'
-    level = 'unknown; user will clarify'
+    if level is None or level == "":
+        level = 'unknown'
+    if level_date is None or level_date == "":
+        level_date = 'unknown'
+    
+        
+    now = datetime.now()
+    now = now.strftime("%Y-%m-%d %H:%M:%S")
 
         
     redis_host = os.environ.get("REDIS_1_HOST")
@@ -52,10 +58,10 @@ def main():
     rd = redis.Redis(host=redis_host, port=redis_port, password=redis_password, ssl=True, ssl_ca_certs="/etc/ssl/certs/ca-certificates.crt")
 
     system_prompt = rd.get("charli@appswithoutcode.com-systemprompt-01").decode('utf-8')
-    system_prompt = system_prompt.format(name = name, app_idea = app_idea, package = package, level = level, week = week)
+    system_prompt = system_prompt.format(name = name, package = package, level = level, level_date = level_date, week = week, current_datetime = now)
 
     initial_text = rd.get("charli@appswithoutcode.com-initialtext-01").decode('utf-8')
-    initial_text = initial_text.format(name = name, app_idea = app_idea, package = package, level = level)
+    initial_text = initial_text.format(name = name, package = package, level = level)
 
     
     if st.button('Click to Start or Restart'):
