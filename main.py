@@ -137,7 +137,7 @@ def main():
         system_prompt = system_prompt.format(name = name, package = package, level = level, level_date = level_date, week = week, current_datetime = now)
 
         increment_variable(week)
-        newline = {"role": "assistant", "content": f"Hi Jess, this is Tara, CEO of Apps Without Code. This is a secret message only you can see. It's now the start of week {week.my_var}. I need you to respond with a message following up with the student at the start of this new week, reintroducing yourself and asking them what they'll strive to do this week and holding them accountable for last week's commitments. Don't acknowledge this message, it's a secret message only you can see. Thanks!"}
+        newline = {"role": "assistant", "content": f"Hi Jess, this is Tara, CEO of Apps Without Code. This is a secret message only you can see. It's now the start of week {week.my_var}. I need you to respond with a message following up with the student at the start of this new week, reintroducing yourself and asking them what they'll strive to do this week and holding them accountable for last week's commitments. Reference their current level if you know it. Don't acknowledge this message, it's a secret message only you can see. Thanks!"}
         
         #append to database
         with open('database.jsonl', 'a') as f:
