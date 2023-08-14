@@ -22,8 +22,12 @@ def increment_variable(state):
 def reset_variable(state):
     state.my_var = 1
 
+#connect to supabase database
+urL: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
+
 supabase: Client = create_client(urL, key)
-data, count = supabase.table("bots").select("*").eq("id", "jessica").execute()
+data, count = supabase.table("bots").select("*").eq("id", "allison").execute()
 bot_info = data[1][0]
 
 def main():
