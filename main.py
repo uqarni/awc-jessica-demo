@@ -99,6 +99,8 @@ def main():
 
     # Create a button to submit the user's message
     if st.button("Send"):
+        system_prompt = bot_info['system_prompt']
+        system_prompt = system_prompt.format(name = name, package = package, level = level, level_date = level_date, week = week, current_datetime = now)
         #prep the json
         newline = {"role": "user", "content": userresponse}
 
