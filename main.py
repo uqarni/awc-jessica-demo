@@ -27,7 +27,7 @@ urL: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_KEY")
 
 supabase: Client = create_client(urL, key)
-data, count = supabase.table("bots").select("*").eq("id", "allison").execute()
+data, count = supabase.table("bots").select("*").eq("id", "jessica").execute()
 bot_info = data[1][0]
 
 def main():
