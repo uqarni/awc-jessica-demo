@@ -43,6 +43,7 @@ def main():
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
     week = get_state(my_var=1)
     level = st.selectbox('Level:', ('1','2','3','4','5','6','7','8','9','10'))
+    level_date = ""
     
 
     if name is None or name == "":
