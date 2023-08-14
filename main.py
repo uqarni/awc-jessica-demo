@@ -63,7 +63,7 @@ def main():
     system_prompt = bot_info['system_prompt']
     system_prompt = system_prompt.format(name = name, package = package, level = level, level_date = level_date, week = week, current_datetime = now)
 
-    initial_text = ['initial_text']
+    initial_text = bot_info['initial_text']
     initial_text = initial_text.format(name = name, package = package, level = level)
 
     
