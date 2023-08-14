@@ -5,8 +5,10 @@ import re
 import random
 
 #generate openai response; returns messages with openai response
-def ideator(messages):
+def ideator(messages, system_prompt):
 
+  messages = messages[1:]
+  messages.insert(0,{"role": "system", "content": system_prompt})
   key = os.environ.get("OPENAI_API_KEY")
   openai.api_key = key
 
