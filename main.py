@@ -4,7 +4,7 @@ import json
 import os
 import sys
 from datetime import datetime
-import redis
+from supabase import create_client, Client
 
 class _SessionState:
     def __init__(self, **kwargs):
@@ -22,6 +22,10 @@ def increment_variable(state):
 def reset_variable(state):
     state.my_var = 1
 
+supabase: Client = create_client(urL, key)
+data, count = supabase.table("bots").select("*").eq("id", "jessica").execute()
+bot_info = data[1][0]
+
 def main():
 
     # Create a title for the chat interface
@@ -34,7 +38,7 @@ def main():
     name = st.text_input("Student name")
     package = st.selectbox('Package', ('Half Package', 'Full Package'))
     week = get_state(my_var=1)
-    level = st.selectbox('Level:', ('1','2','3'))
+    level = st.selectbox('Level:', ('1','2','3','4','5','6','7','8','9','10'))
     level_date = st.text_input("Date of Level")
     
 
@@ -52,15 +56,10 @@ def main():
     now = now.strftime("%Y-%m-%d %H:%M:%S")
 
         
-    redis_host = os.environ.get("REDIS_1_HOST")
-    redis_port = 25061
-    redis_password = os.environ.get("REDIS_1_PASSWORD")
-    rd = redis.Redis(host=redis_host, port=redis_port, password=redis_password, ssl=True, ssl_ca_certs="/etc/ssl/certs/ca-certificates.crt")
-
-    system_prompt = rd.get("charli@appswithoutcode.com-systemprompt-01").decode('utf-8')
+    system_prompt = bot_info['system_prompt']
     system_prompt = system_prompt.format(name = name, package = package, level = level, level_date = level_date, week = week, current_datetime = now)
 
-    initial_text = rd.get("charli@appswithoutcode.com-initialtext-01").decode('utf-8')
+    initial_text = ['initial_text']
     initial_text = initial_text.format(name = name, package = package, level = level)
 
     
