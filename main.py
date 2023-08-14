@@ -118,7 +118,7 @@ def main():
                 messages.append(json_obj)
 
         #generate OpenAI response
-        messages, count = ideator(messages)
+        messages, count = ideator(messages, system_prompt)
 
         #append to database
         with open('database.jsonl', 'a') as f:
@@ -153,7 +153,7 @@ def main():
                 messages.append(json_obj)
 
         #generate OpenAI response
-        messages, count = ideator(messages)
+        messages, count = ideator(messages, system_prompt)
 
         #append to database
         with open('database.jsonl', 'a') as f:
