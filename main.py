@@ -171,7 +171,7 @@ def main():
             else:
                 string = string + '**New Week**' + '\n\n'
         st.write(string)
-        st.write("*Currently in Week:* " + str(week.my_var))
+    st.write("*Currently in Week:* " + str(week.my_var))
             
 
 if __name__ == '__main__':
